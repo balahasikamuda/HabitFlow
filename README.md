@@ -131,16 +131,6 @@ npm run install:all
 ```
 *(Or install individually: `cd backend && npm install` then `cd ../frontend && npm install`)*
 
-### 3. Environment Variables Setup
-The backend `.env` file is already pre-configured in `backend/.env`:
-```env
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/habitflow
-JWT_SECRET=habitflow_super_secret_jwt_key_hackathon_2026
-NODE_ENV=development
-```
-*(If using MongoDB Atlas, replace `MONGO_URI` with your Atlas connection string).*
-
 ---
 
 ## 🏃 Run Commands
