@@ -1,0 +1,27 @@
+{
+  "name": "habitflow",
+  "version": "1.0.0",
+  "description": "HabitFlow - Modern MERN Stack Habit Tracking Application for College Hackathon",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "seed": "npm run seed --prefix backend",
+    "test": "npm test --prefix backend",
+    "build": "npm run build --prefix frontend"
+  },
+  "keywords": [
+    "mern",
+    "habit-tracking",
+    "react",
+    "node",
+    "express",
+    "mongodb",
+    "hackathon"
+  ],
+  "author": "HabitFlow Team",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
