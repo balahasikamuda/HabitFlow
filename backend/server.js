@@ -14,6 +14,7 @@ const app = express();
 
 // Middlewares
 const allowedOrigins = [
+  'https://habitflow-frontend-s6kv.onrender.com',
   'http://localhost:5173',
   'http://127.0.0.1:5173',
   'http://localhost:3000',
@@ -23,16 +24,24 @@ const allowedOrigins = [
 app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (like mobile apps, curl, Postman)
-    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+    if (!origin) {
       return callback(null, true);
     }
-    // In production, allow all render / vercel / netlify preview subdomains if FRONTEND_URL is not strictly set
-    if (!process.env.FRONTEND_URL) {
+    // Match exact or without trailing slash
+    const cleanOrigin = origin.replace(/\/+$/, '');
+    const isAllowed = allowedOrigins.some(o => {
+      const cleanO = o.replace(/\/+$/, '');
+      return cleanO === cleanOrigin || cleanO === '*';
+    });
+
+    if (isAllowed || !process.env.FRONTEND_URL) {
       return callback(null, true);
     }
-    return callback(new Error('Not allowed by CORS'));
+    return callback(new Error(`Origin ${origin} not allowed by CORS`));
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
